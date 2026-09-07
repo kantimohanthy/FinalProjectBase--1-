@@ -1,0 +1,251 @@
+﻿CustomerId,Name,Email,Age,Country,SignupDate,TotalSpent
+1001,Alice Martin,alice.martin1@example.com,101,Deutschland,June 45 2025,14769.63
+1002,Bob Robert,bob.robert2@example.com,53,Germany,2025-06-23,10103.97
+1003,Charlie Laurent,charlie.laurent3@example.com,61,Spain,2026-03-25,4241.52
+1004,Diana Fournier,user#example.com,31,France,2025-2-3,95.89
+1005,Emma Martin,emma.martin5@example.com,110,Germany,2023-03-12,6469.79
+1006,Farid Robert,farid.robert6@example.com,22,United Kingdom,2025-03-08,-120.00
+1007,Gabriel Laurent,gabriel.laurent7@example.com,64,Italy,2023-09-21,5529.99
+1008,Hana Fournier,hana.fournier8@example.com,54,United States,2024-08-22,3473.65
+1009,,@example.com,75,Italy,2024-09-04,3249.21
+1010,Julien Robert,missing-at.example.com,62,Canada,2026-04-07,3037.40
+1011,Karim Laurent,,27,Netherlands,2026-04-18,9042.55
+1012,Laura Fournier,laura.fournier12@example.com,81,Canada,2026-06-18,6212.90
+1013,Mehdi Martin,mehdi.martin13@example.com,18,Canada,2023-09-26,440.63
+1014,Nora Robert,nora.robert14@example.com,40,Canada,2023-06-01,1402.21
+1015,Olivier Laurent,olivier.laurent15@example.com,64,United States,2025-01-08,10489.42
+1016,Priya Fournier,priya.fournier16@example.com,40,USA,2025-11-04,2882.44
+1017,Quentin Martin,quentin.martin17@example.com,68,Germany,2025-01-14,
+1018,Rania Robert,rania.robert18@example.com,26,Italy,2023-06-06,14009.74
+1019,Sofia Laurent,sofia.laurent19@example.com,36,Belgium,2023-10-11,4320.04
+1020,Thomas Fournier,thomas.fournier20@example.com,69,Germany,2023-02-18,2637.23
+1021,Ugo Martin,ugo.martin21@example.com,52,Canada,2024-03-30,11805.45
+1022,,victoria.robert22@example.com,69,United Kingdom,2024-04-01,2846.61
+1023,William Laurent,william.laurent23@example.com,63,Belgium,2025-06-16,11990.13
+1024,Yasmine Fournier,"user@domain,com",35,Germany,2025-03-25,14563.14
+1025,Zoe Martin,zoe.martin25@example.com,56,Germany,2023-04-19,
+1005,Clara Robert,user@example,85,Spain,2023-09-08,8346.60
+1027,Nicolas Laurent,nicolas.laurent27@example.com,38,Belgium,2023-12-17,4971.65
+1014,Leila Fournier,leila.fournier28@example.com,67,Italy,2025-07-07,1145.97
+1029,Martin Martin,martin.martin29@example.com,84,spain,2025-05-16,11548.17
+1030,Sarah Robert,user@.com,21,Netherlands,2024-05-28,8738.79
+1031,Alice Laurent,alice.laurent31@example.com,51,Canada,2026-03-11,1196.49
+1032,Bob Fournier,,38,Great Britain,2026-01-23,6209.54
+1033,Charlie Martin,charlie.martin33@example.com,48,Belgium,2025-09-25,3989.60
+1034,Diana Robert,diana.robert34@example.com,38,Italy,2025-11-22,7994.42
+1035,Emma Laurent,emma.laurent35@example.com,37,Belgium,2024-08-24,13192.82
+1036,Farid Fournier,farid.fournier36@example.com,54,Spain,2024-09-08,13071.34
+1037,Gabriel Martin,gabriel.martin37@example.com,67,Canada,2026-01-20,2032.80
+1038,Hana Robert,hana.robert38@example.com,24,United Kingdom,2025-04-11,11517.37
+1039,Ines Laurent,ines.laurent39@example.com,71,GERMANY,2023-03-16,1554.37
+1040,Julien Fournier,julien.fournier40@example.com,50,United Kingdom,2025-11-15,6938.36
+1041,,user..name@example.com,33,France,2026-06-16,13853.74
+1042,Laura Robert,laura.robert42@example.com,79,Netherlands,2024-01-08,13712.81
+1043,Mehdi Laurent,user@,49,France,2026-01-31,
+1044,Nora Fournier,,27,Germany,2026-04-23,14024.71
+1045,Olivier Martin,olivier.martin45@example.com,60,Spain,2023-03-07,2763.23
+1046,Priya Robert,priya.robert46@example.com,58,United States,2024-12-27,-10.00
+1047,Quentin Laurent,quentin.laurent47@example.com,19,United Kingdom,2025-11-16,6955.89
+1048,Rania Fournier,rania.fournier48@example.com,180,Canada,2026-01-11,11570.79
+1049,Sofia Martin,sofia.martin49@example.com,21,United Kingdom,2025-10-29,2048.26
+1050,Thomas Robert,thomas.robert50@example.com,55,Holland,2024-12-06,7370.43
+1051,Ugo Laurent,ugo.laurent51@example.com,29,Canada,2025-11-21,12807.31
+1052,Victoria Fournier,victoria.fournier52@example.com,25,Italy,2023-02-25,2285.86
+1053,William Martin,user@example..com,54,United States,2024-01-27,8696.16
+1054,Yasmine Robert,yasmine.robert54@example.com,52,United States,,3142.05
+1055,Zoe Laurent,zoe.laurent55@example.com,87,Canada,2024-06-27,11831.38
+1056,Clara Fournier,clara.fournier56@example.com,27,United Kingdom,2024-10-12,6288.44
+1057,Nicolas Martin,nicolas.martin57@example.com,15,France,2025-06-25,
+1058,Leila Robert,leila.robert58@example.com,42,United Kingdom,2023-07-11,269.63
+1009,Martin Laurent,martin.laurent59@example.com,28,Holland,2024-07-05,9138.97
+1060,Sarah Fournier,sarah.fournier60@example.com,77,United States,2024-06-28,2145.22
+1061,Alice Martin,alice.martin61@example.com,0,Germany,2023-12-21,12029.12
+1062,Bob Robert,bob.robert62@example.com,-3,Belgium,2024-06-12,2059.58
+1063,Charlie Laurent,,62,France,2025-08-05,6128.83
+1064,Diana Fournier,diana.fournier64@example.com,60,Netherlands,2023-02-26,4568.17
+1065,Emma Martin,emma.martin65@example.com,19,Spain,2024-01-18,12643.07
+1036,Farid Robert,farid.robert66@example.com,44,United States,2025-06-05,12658.59
+1031,Gabriel Laurent,gabriel.laurent67@example.com,74,Belgium,2025-10-29,3785.17
+1068,Hana Fournier,hana.fournier68@example.com,63,Spain,2026-02-11,2491.99
+1058,Ines Martin,ines.martin69@example.com,22,France,2024-07-09,10438.60
+1070,Julien Robert,julien.robert70@example.com,45,Belgium,2024-09-18,823.00
+1071,Karim Laurent,karim.laurent71@example.com,78,Germany,2025-10-21,756.90
+1035,Laura Fournier,laura.fournier72@example.com,68,Belgium,2026-05-11,4604.58
+1073,Mehdi Martin,mehdi.martin73@example.com,38,Germany,2025-03-29,9887.58
+1074,Nora Robert,nora.robert74@example.com,42,France,2025-01-31,14727.41
+1075,Olivier Laurent,olivier.laurent75@example.com,40,CANADA,0000-00-00,7026.85
+1076,Priya Fournier,priya.fournier76@example.com,69,ES,2025-12-01,10959.28
+1005,Quentin Martin,quentin.martin77@example.com,48,united states,2023-11-06,-2500.00
+1078,Rania Robert,rania.robert78@example.com,125,Canada,2024-11-25,414.79
+1079,Sofia Laurent,sofia.laurent79@example.com,52,Belgium,2024-06-09,294.67
+1080,Thomas Fournier,,71,netherlands,2024-07-03,1144.91
+1052,Ugo Martin,ugo.martin81@example.com,20,France,2024-07-31,4633.59
+1082,Victoria Robert,victoria.robert82@example.com,84,Germany,2026-03-30,10016.32
+1083,William Laurent,william.laurent83@example.com,50,Canada,2024-07-04,13657.81
+1084,Yasmine Fournier,yasmine.fournier84@example.com,56,Canada,2026-04-16,12092.68
+1085,Zoe Martin,zoe.martin85@example.com,36,France,2024-04-09,10671.06
+1086,Clara Robert,clara.robert86@example.com,82,Germany,2023-04-03,10761.20
+1087,,,26,Canada,2023-04-30,2422.75
+1088,Leila Fournier,leila.fournier88@example.com,85,Netherlands,2023-01-08,-250.75
+1089,Martin Martin,martin.martin89@example.com,55,Belgium,2023-05-05,750.82
+1090,Sarah Robert,sarah.robert90@example.com,35,Canada,2026-04-16,1483.96
+1091,Alice Laurent,alice.laurent91@example.com,33,Italy,2023-05-18,7167.17
+1092,Bob Fournier,bob.fournier92@example.com,20,Holland,2024-05-06,5843.70
+1093,Charlie Martin,charlie.martin93@example.com,83,United States,2023-12-13,5531.32
+1094,Diana Robert,diana.robert94@example.com,60,Netherlands,2025-12-24,13625.54
+1032,Emma Laurent,,58,Spain,2024-01-07,14273.23
+1096,Farid Fournier,farid.fournier96@example.com,31,United Kingdom,2025-09-12,3126.24
+1097,Gabriel Martin,gabriel.martin97@example.com,18,United kingdom,2024-03-25,11061.28
+1098,Hana Robert,hana.robert98@example.com,31,Spain,2023-11-04,4073.87
+1099,Ines Laurent,ines.laurent99@example.com,65,Italy,2025-10-22,11967.38
+1100,Julien Fournier,julien.fournier100@example.com,63,Canada,2026-04-31,2573.82
+1101,Karim Martin,,38,Italy,2023-10-18,2759.14
+1102,Laura Robert,laura.robert102@example.com,62,France,2025-01-24,8896.76
+1103,Mehdi Laurent,mehdi.laurent103@example.com,58,spain,2025-10-31,2070.48
+1104,Nora Fournier,nora.fournier104@example.com,45,BELGIQUE,2025-06-15,248.42
+1105,Olivier Martin,olivier.martin105@example.com,79,Germany,2026-02-27,11195.41
+1106,Priya Robert,priya.robert106@example.com,52,Deutschland,2023-07-19,10422.55
+1107,Quentin Laurent,quentin.laurent107@example.com,20,FR,2024-09-23,8183.83
+1108,Rania Fournier,rania.fournier108@example.com,88,Deutschland,2025-02-17,1381.11
+1109,Sofia Martin,sofia.martin109@example.com,77,France,2025-02-04,4527.42
+1110,Thomas Robert,thomas.robert110@example.com,23,Spain,2025-03-06,6918.81
+1111,Ugo Laurent,ugo.laurent111@example.com,56,Germany,2023-03-07,5455.40
+1112,Victoria Fournier,victoria.fournier112@example.com,83,Spain,2023-02-28,7802.76
+1113,William Martin,william.martin113@example.com,81,United States,2023-09-22,13616.29
+1114,Yasmine Robert,yasmine.robert114@example.com,59,Netherlands,2024-07-05,7237.69
+1115,Zoe Laurent,zoe.laurent115@example.com,21,Spain,2023-08-30,11065.49
+1116,Clara Fournier,clara.fournier116@example.com,65,ES,2025-08-09,5413.88
+1117,Nicolas Martin,nicolas.martin117@example.com,40,Spain,2025/99/01,11796.55
+1118,Leila Robert,leila.robert118@example.com,84,Great Britain,2025-05-27,8680.84
+1119,Martin Laurent,martin.laurent119@example.com,66,Italy,2024-04-08,5871.88
+1120,Sarah Fournier,sarah.fournier120@example.com,58,France,2025-01-28,825.72
+1121,Alice Martin,alice.martin121@example.com,38,United States,2023-08-24,6694.85
+1122,Bob Robert,bob.robert122@example.com,31,ITALIA,2023-06-26,5440.18
+1123,Charlie Laurent,charlie.laurent123@example.com,250,Netherlands,2024-07-02,6116.73
+1124,Diana Fournier,diana.fournier124@example.com,81,Spain,2023-01-28,12197.65
+1125,Emma Martin,emma.martin125@example.com,73,Spain,2024-10-23,1714.32
+1126,Farid Robert,farid.robert126@example.com,25,Germany,2023-10-20,14928.21
+1127,Gabriel Laurent,gabriel.laurent127@example.com,29,Germany,2026-05-18,9564.60
+1128,Hana Fournier,hana.fournier128@example.com,38,Germany,2025-04-04,2183.39
+1129,Ines Martin,ines.martin129@example.com,27,Belgium,2023-08-14,3874.55
+1130,Julien Robert,julien.robert130@example.com,67,Netherlands,2023-03-21,8321.41
+1131,Karim Laurent,karim.laurent131@example.com,28,France,2023-04-22,4264.23
+1132,Laura Fournier,laura.fournier132@example.com,18,France,31/02/2025,2048.66
+1133,Mehdi Martin,mehdi.martin133@example.com,23,France,2023-12-06,290.03
+1134,Nora Robert,nora.robert134@example.com,68,Spain,2025-07-13,9426.77
+1135,Olivier Laurent,olivier.laurent135@example.com,68,GERMANY,2025-06-10,6898.47
+1136,Priya Fournier,priya.fournier136@example.com,61,España,2024-12-18,5197.05
+1137,Quentin Martin,quentin.martin137@example.com,63,United States,2026-04-02,2256.07
+1138,Rania Robert,rania.robert138@example.com,26,Netherlands,2023-03-16,14248.86
+1139,Sofia Laurent,sofia.laurent139@example.com,66,Canada,2024-10-27,-25.50
+1140,Thomas Fournier,thomas.fournier140@example.com,51,Belgium,2023-01-06,13935.82
+1141,,ugo.martin141@example.com,40,Italy,2024-02-10,52.35
+1142,Victoria Robert,victoria.robert142@example.com,81,United States,2023-01-20,1255.06
+1143,William Laurent,user@@example.com,48,Italy,2024-12-28,7623.08
+1144,Yasmine Fournier,yasmine.fournier144@example.com,87,Netherlands,2023-10-22,60.08
+1145,Zoe Martin,zoe.martin145@example.com,71,spain,2025-10-18,1118.36
+1146,Clara Robert,clara.robert146@example.com,75,France,2023-05-02,3459.62
+1134,Nicolas Laurent,nicolas.laurent147@example.com,63,Belgium,2025-09-13,9223.14
+1148,Leila Fournier,leila.fournier148@example.com,89,France,2025-07-23,11288.87
+1149,Martin Martin,martin.martin149@example.com,68,United States,2025-08-13,11595.73
+1150,Sarah Robert,sarah.robert150@example.com,35,France,2023-07-23,13682.83
+1151,Alice Laurent,alice.laurent151@example.com,66,United Kingdom,2023-09-04,9393.81
+1152,Bob Fournier,bob.fournier152@example.com,50,United States,2024-12-22,10308.35
+1153,Charlie Martin,charlie.martin153@example.com,40,United States,2024-06-05,13863.62
+1154,Diana Robert,diana.robert154@example.com,76,Italy,2026-02-25,1837.71
+1155,Emma Laurent,emma.laurent155@example.com,76,United States,2023-10-17,4290.74
+1156,Farid Fournier,farid.fournier156@example.com,68,Italy,2025-11-11,12817.44
+1157,Gabriel Martin,gabriel.martin157@example.com,81,France,2024-02-30,5772.96
+1158,Hana Robert,.user@example.com,63,Canada,2025-02-18,11159.55
+1159,Ines Laurent,ines.laurent159@example.com,26,Canada,2024-07-04,6694.01
+1160,Julien Fournier,julien.fournier160@example.com,27,Canada,2023-02-22,9749.04
+1161,Karim Martin,karim.martin161@example.com,88,United Kingdom,2023-07-24,11421.64
+1162,Laura Robert,laura.robert162@example.com,69,Germany,2026-01-03,14377.16
+1163,Mehdi Laurent,mehdi.laurent163@example.com,20,France,2024-04-19,14028.10
+1164,Nora Fournier,nora.fournier164@example.com,36,Italy,2025-12-09,1837.81
+1142,Olivier Martin,olivier.martin165@example.com,18,Netherlands,2025-07-26,12841.99
+1166,Priya Robert,priya.robert166@example.com,83,United Kingdom,2025-11-04,-1000.00
+1167,Quentin Laurent,quentin.laurent167@example.com,49,Belgium,2025-07-07,2290.43
+1158,Rania Fournier,rania.fournier168@example.com,68,Netherlands,2023-11-27,9110.82
+1169,Sofia Martin,sofia.martin169@example.com,89,Netherlands,2023-03-02,3032.96
+1170,Thomas Robert,thomas.robert170@example.com,58,Canada,2025-03-04,12714.10
+1171,Ugo Laurent,ugo.laurent171@example.com,57,United Kingdom,2025-11-16,2510.07
+1172,Victoria Fournier,victoria.fournier172@example.com,89,United Kingdom,2025-04-15,10306.66
+1173,William Martin,william.martin173@example.com,65,Netherlands,2026-06-09,14797.31
+1174,Yasmine Robert,yasmine.robert174@example.com,49,Italy,2026-01-17,3579.84
+1175,Zoe Laurent,zoe.laurent175@example.com,85,Netherlands,2024-01-03,9704.83
+1176,Clara Fournier,clara.fournier176@example.com,72,United Kingdom,2023-10-30,5076.18
+1177,Nicolas Martin,nicolas.martin177@example.com,51,United States,2024-12-14,6863.43
+1178,Leila Robert,leila.robert178@example.com,30,United States,2026-02-02,2101.53
+1179,Martin Laurent,,65,USA,2023-01-21,13105.95
+1180,Sarah Fournier,sarah.fournier180@example.com,19,Netherlands,2023-05-03,10702.03
+1181,Alice Martin,alice.martin181@example.com,41,Belgium,2024-01-06,5070.63
+1182,Bob Robert,bob.robert182@example.com,38,France,2026-03-30,5469.89
+1183,Charlie Laurent,charlie.laurent183@example.com,24,Belgium,2024-05-12,6041.29
+1184,Diana Fournier,diana.fournier184@example.com,89,United States,2024-07-26,
+1185,Emma Martin,emma.martin185@example.com,82,Belgium,2025-09-26,9157.28
+1186,Farid Robert,farid.robert186@example.com,35,Canada,2026-03-15,3252.39
+1187,Gabriel Laurent,gabriel.laurent187@example.com,20,United States,2025-07-31,9988.71
+1188,Hana Fournier,hana.fournier188@example.com,72,Belgium,2024-02-19,12289.83
+1189,Ines Martin,ines.martin189@example.com,30,France,2023-09-20,6707.47
+1190,Julien Robert,julien.robert190@example.com,16,Canada,2026-02-20,-500.00
+1191,Karim Laurent,karim.laurent191@example.com,85,France,2026-06-13,14829.24
+1192,Laura Fournier,laura.fournier192@example.com,81,Netherlands,2025-06-02,3562.50
+1193,Mehdi Martin,mehdi.martin193@example.com,58,United Kingdom,2023-01-15,2303.08
+1194,Nora Robert,nora.robert194@example.com,59,Belgium,2024-12-04,2738.05
+1195,Olivier Laurent,olivier.laurent195@example.com,77,USA,2025-11-22,9871.53
+1196,Priya Fournier,priya.fournier196@example.com,33,Spain,2025-01-06,12441.29
+1197,Quentin Martin,quentin.martin197@example.com,17,Belgium,2024-10-28,538.43
+1198,Rania Robert,rania.robert198@example.com,74,France,2024-09-13,12440.17
+1199,Sofia Laurent,sofia.laurent199@example.com,33,France,2025-06-20,9584.79
+1200,Thomas Fournier,thomas.fournier200@example.com,33,Belgium,2023-04-26,1953.23
+1201,Ugo Martin,ugo.martin201@example.com,24,Canada,2024-01-29,4048.72
+1202,Victoria Robert,user@example.c,58,Belgium,2025-11-03,8015.18
+1203,William Laurent,william.laurent203@example.com,77,France,2025-09-21,2965.55
+1204,Yasmine Fournier,yasmine.fournier204@example.com,59,Canada,2023-11-12,6542.75
+1205,Zoe Martin,zoe.martin205@example.com,25,United Kingdom,2023-04-29,4002.33
+1206,Clara Robert,clara.robert206@example.com,19,Belgium,2024-05-24,11770.24
+1207,Nicolas Laurent,nicolas.laurent207@example.com,20,United Kingdom,2025-06-22,1701.14
+1208,Leila Fournier,leila.fournier208@example.com,33,BE,2023-02-06,2433.89
+1209,Martin Martin,martin.martin209@example.com,40,Netherlands,2026-06-06,11625.91
+1210,Sarah Robert,sarah.robert210@example.com,50,United Kingdom,2023-06-26,6979.56
+1211,Alice Laurent,alice.laurent211@example.com,18,Spain,2023-08-10,1103.84
+1212,Bob Fournier,bob.fournier212@example.com,71,Germany,2025-13-01,12659.41
+1213,,charlie.martin213@example.com,37,United Kingdom,2023-08-04,8696.97
+1214,Diana Robert,diana.robert214@example.com,25,CANADA,2024-12-23,12541.00
+1215,Emma Laurent,emma.laurent215@example.com,19,Canada,2024-08-14,14378.19
+1216,Farid Fournier,farid.fournier216@example.com,65,U.S.A.,2025-04-24,5234.51
+1217,Gabriel Martin,gabriel.martin217@example.com,51,France,2023-08-31,9848.97
+1218,Hana Robert,hana.robert218@example.com,38,United States,2023-11-13,7861.90
+1219,Ines Laurent,ines.laurent219@example.com,21,United Kingdom,2024-11-24,987.78
+1220,Julien Fournier,julien.fournier220@example.com,77,Belgium,2023-02-06,13102.58
+1221,Karim Martin,karim.martin221@example.com,22,Belgium,2025-06-04,6974.08
+1222,Laura Robert,laura.robert222@example.com,63,Canada,2025-08-04,383.96
+1223,Mehdi Laurent,mehdi.laurent223@example.com,43,Germany,2026-02-28,7613.05
+1224,Nora Fournier,nora.fournier224@example.com,77,Spain,2024-03-21,11348.15
+1113,Olivier Martin,plainaddress,26,Netherlands,2024-06-03,12593.71
+1226,Priya Robert,priya.robert226@example.com,41,Belgium,2025-10-19,2004.53
+1227,Quentin Laurent,,19,Italy,2026-03-25,4302.25
+1228,Rania Fournier,rania.fournier228@example.com,46,Spain,2025-11-28,5799.65
+1229,Sofia Martin,sofia.martin229@example.com,36,United States,2024-02-14,4708.08
+1230,Thomas Robert,thomas.robert230@example.com,59,Germany,2026-04-01,12243.55
+1012,Laura Fournier,laura.fournier12@example.com,81,Canada,2026-06-18,6212.90
+1232,Victoria Fournier,victoria.fournier232@example.com,42,Spain,2026-03-30,-99.99
+1233,William Martin,william.martin233@example.com,57,Germany,2026-02-07,1425.70
+1234,Yasmine Robert,yasmine.robert234@example.com,59,Italy,2024-06-11,14731.80
+1235,Zoe Laurent,zoe.laurent235@example.com,53,United States,2025-06-13,7761.72
+1048,Rania Fournier,rania.fournier48@example.com,180,Canada,2026-01-11,11570.79
+1237,Nicolas Martin,nicolas.martin237@example.com,29,United States,2023-01-14,11863.62
+1238,Leila Robert,leila.robert238@example.com,66,Belgium,2025-09-02,3450.06
+1239,Martin Laurent,martin.laurent239@example.com,74,DE,2025-11-07,10054.96
+1240,Sarah Fournier,sarah.fournier240@example.com,68,United Kingdom,2024-11-01,11141.94
+1005,Quentin Martin,quentin.martin77@example.com,48,united states,2023-11-06,-2500.00
+1242,Bob Robert,bob.robert242@example.com,71,United Kingdom,not-a-date,2437.86
+1243,Charlie Laurent,,38,Spain,2023-11-15,2871.13
+1244,Diana Fournier,diana.fournier244@example.com,21,BELGIQUE,2025-07-27,2328.24
+1245,Emma Martin,emma.martin245@example.com,44,United States,2026-04-06,10269.36
+1103,Mehdi Laurent,mehdi.laurent103@example.com,58,spain,2025-10-31,2070.48
+1247,Gabriel Laurent,gabriel.laurent247@example.com,61,United States,2024-04-29,2197.24
+1248,Hana Fournier,hana.fournier248@example.com,35,Canada,2023-05-23,13800.63
+1249,Ines Martin,ines.martin249@example.com,40,Netherlands,2024-09-10,9782.68
+1155,Emma Laurent,emma.laurent155@example.com,76,United States,2023-10-17,4290.74
