@@ -1,3 +1,4 @@
+using DataQualityPlatform.Exceptions;
 using DataQualityPlatform.Models;
 
 namespace DataQualityPlatform.DataSources;
@@ -17,13 +18,64 @@ public class CsvDataSource : IDataSource
 
     public Dataset Load(string path)
     {
-        // TODO(STUDENT): Check that the file exists.
-        // TODO(STUDENT): Read the headers from the first CSV line.
-        // TODO(STUDENT): Validate that all required columns are present.
-        // TODO(STUDENT): Convert every CSV row into a DataRecord.
-        // TODO(STUDENT): Keep imported values as raw strings, including invalid values.
-        // TODO(STUDENT): Do not trim, normalize, reject, deduplicate, or transform data here.
-        throw new NotImplementedException("TODO: Student implementation.");
+        if (!File.Exists(path))
+        {
+            throw new DatasetNotFoundException($"Dataset file not found: {path}");
+        }
+
+        string[] lines = File.ReadAllLines(path);
+
+        if (lines.Length == 0)
+        {
+            throw new InvalidDatasetFormatException("Dataset file is empty.");
+        }
+
+        string[] headers = lines[0].Split(',');
+
+        bool hasAllRequiredColumns =
+            RequiredColumns.All(requiredColumn => headers.Contains(requiredColumn));
+
+        if (!hasAllRequiredColumns)
+        {
+            throw new InvalidDatasetFormatException("One or more required columns are missing.");
+        }
+
+        Dataset dataset = new()
+        {
+            Name = Path.GetFileName(path)
+        };
+
+        foreach (string header in headers)
+        {
+            dataset.Columns.Add(new ColumnDefinition
+            {
+                Name = header
+            });
+        }
+
+        for (int lineIndex = 1; lineIndex < lines.Length; lineIndex++)
+        {
+            string[] values = lines[lineIndex].Split(',');
+
+            if (values.Length != headers.Length)
+            {
+                throw new InvalidDatasetFormatException(
+                    $"Row {lineIndex} does not match the header column count.");
+            }
+
+            DataRecord record = new()
+            {
+                RowNumber = lineIndex
+            };
+
+            for (int columnIndex = 0; columnIndex < headers.Length; columnIndex++)
+            {
+                record.Values[headers[columnIndex]] = values[columnIndex];
+            }
+
+            dataset.Records.Add(record);
+        }
+
+        return dataset;
     }
 }
-

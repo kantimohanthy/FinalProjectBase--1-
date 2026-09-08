@@ -8,11 +8,22 @@ public class QualityScoreCalculator
         Dataset dataset,
         IEnumerable<QualityIssue> issues)
     {
-        // TODO(STUDENT): Calculate total cells as row count multiplied by column count.
-        // TODO(STUDENT): Count invalid cells as distinct RowNumber and ColumnName pairs.
-        // TODO(STUDENT): Calculate score as 100 minus the invalid cell percentage.
-        // TODO(STUDENT): Clamp the score between 0 and 100.
-        // TODO(STUDENT): Return 0 for an empty dataset.
-        throw new NotImplementedException("TODO: Student implementation.");
+        if (dataset.Records.Count == 0 || dataset.Columns.Count == 0)
+        {
+            return 0;
+        }
+
+        long totalCells =
+            (long)dataset.Records.Count * dataset.Columns.Count;
+
+        int invalidCellCount = issues
+            .Select(issue => (issue.RowNumber, issue.ColumnName))
+            .Distinct()
+            .Count();
+
+        double score =
+            100.0 - ((double)invalidCellCount / totalCells * 100.0);
+
+        return Math.Clamp(score, 0.0, 100.0);
     }
 }

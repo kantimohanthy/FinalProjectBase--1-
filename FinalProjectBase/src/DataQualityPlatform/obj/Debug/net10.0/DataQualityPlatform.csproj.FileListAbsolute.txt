@@ -76,3 +76,4 @@ H:\ashish anna assigment\FinalProjectBase (1)\FinalProjectBase\src\DataQualityPl
 H:\ashish anna assigment\FinalProjectBase (1)\FinalProjectBase\src\DataQualityPlatform\obj\Debug\net10.0\DataQualityPlatform.pdb
 H:\ashish anna assigment\FinalProjectBase (1)\FinalProjectBase\src\DataQualityPlatform\obj\Debug\net10.0\DataQualityPlatform.genruntimeconfig.cache
 H:\ashish anna assigment\FinalProjectBase (1)\FinalProjectBase\src\DataQualityPlatform\obj\Debug\net10.0\ref\DataQualityPlatform.dll
+H:\ashish anna assigment\FinalProjectBase (1)\FinalProjectBase\src\DataQualityPlatform\obj\Debug\net10.0\DataQualityPlatform.sourcelink.json

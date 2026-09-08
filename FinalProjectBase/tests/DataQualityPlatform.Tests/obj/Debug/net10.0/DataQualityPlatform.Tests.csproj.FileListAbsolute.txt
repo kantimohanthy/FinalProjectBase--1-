@@ -167,3 +167,4 @@ H:\ashish anna assigment\FinalProjectBase (1)\FinalProjectBase\tests\DataQuality
 H:\ashish anna assigment\FinalProjectBase (1)\FinalProjectBase\tests\DataQualityPlatform.Tests\obj\Debug\net10.0\DataQualityPlatform.Tests.pdb
 H:\ashish anna assigment\FinalProjectBase (1)\FinalProjectBase\tests\DataQualityPlatform.Tests\obj\Debug\net10.0\DataQualityPlatform.Tests.genruntimeconfig.cache
 H:\ashish anna assigment\FinalProjectBase (1)\FinalProjectBase\tests\DataQualityPlatform.Tests\obj\Debug\net10.0\ref\DataQualityPlatform.Tests.dll
+H:\ashish anna assigment\FinalProjectBase (1)\FinalProjectBase\tests\DataQualityPlatform.Tests\obj\Debug\net10.0\DataQualityPlatform.Tests.sourcelink.json

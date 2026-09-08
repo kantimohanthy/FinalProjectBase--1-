@@ -1,3 +1,4 @@
+using DataQualityPlatform.Exceptions;
 using DataQualityPlatform.Models;
 
 namespace DataQualityPlatform.Quality;
@@ -13,9 +14,43 @@ public class DateFormatRule : QualityRule
 
     public override List<QualityIssue> Evaluate(Dataset dataset)
     {
-        // TODO(STUDENT): Throw ColumnNotFoundException when ColumnName is not present.
-        // TODO(STUDENT): Use DateTime.TryParseExact with the yyyy-MM-dd format.
-        // TODO(STUDENT): Ignore missing values because MissingValueRule handles them.
-        throw new NotImplementedException("TODO: Student implementation.");
+        if (!dataset.Columns.Any(column => column.Name == ColumnName))
+        {
+            throw new ColumnNotFoundException(ColumnName);
+        }
+
+        List<QualityIssue> issues = new();
+
+        foreach (DataRecord record in dataset.Records)
+        {
+            string? value = GetValue(record);
+
+            if (string.IsNullOrWhiteSpace(value))
+            {
+                continue;
+            }
+
+            bool isValidDate = DateTime.TryParseExact(
+                value,
+                RequiredFormat,
+                System.Globalization.CultureInfo.InvariantCulture,
+                System.Globalization.DateTimeStyles.None,
+                out _);
+
+            if (!isValidDate)
+            {
+                issues.Add(new QualityIssue
+                {
+                    RowNumber = record.RowNumber,
+                    ColumnName = ColumnName,
+                    RuleName = Name,
+                    InvalidValue = value,
+                    Message = $"Value is not in the required date format ({RequiredFormat}).",
+                    Severity = IsCritical ? IssueSeverity.Error : IssueSeverity.Warning
+                });
+            }
+        }
+
+        return issues;
     }
 }

@@ -1,4 +1,6 @@
+using DataQualityPlatform.Exceptions;
 using DataQualityPlatform.Models;
+using System.Globalization;
 
 namespace DataQualityPlatform.Quality;
 
@@ -21,12 +23,57 @@ public class RangeRule : QualityRule
 
     public override List<QualityIssue> Evaluate(Dataset dataset)
     {
-        // TODO(STUDENT): Throw ColumnNotFoundException when ColumnName is not present.
-        // TODO(STUDENT): Parse values with CultureInfo.InvariantCulture.
-        // TODO(STUDENT): Ignore missing values because MissingValueRule handles them.
-        // TODO(STUDENT): Treat minimum and maximum limits as inclusive.
-        // TODO(STUDENT): Generate an issue for non-numeric values.
-        // TODO(STUDENT): Generate an issue for values outside the inclusive range.
-        throw new NotImplementedException("TODO: Student implementation.");
+        if (!dataset.Columns.Any(column => column.Name == ColumnName))
+        {
+            throw new ColumnNotFoundException(ColumnName);
+        }
+
+        List<QualityIssue> issues = new();
+
+        foreach (DataRecord record in dataset.Records)
+        {
+            string? value = GetValue(record);
+
+            if (string.IsNullOrWhiteSpace(value))
+            {
+                continue;
+            }
+
+            bool isValidNumber = decimal.TryParse(
+                value,
+                NumberStyles.Number,
+                CultureInfo.InvariantCulture,
+                out decimal parsedValue);
+
+            if (!isValidNumber)
+            {
+                issues.Add(new QualityIssue
+                {
+                    RowNumber = record.RowNumber,
+                    ColumnName = ColumnName,
+                    RuleName = Name,
+                    InvalidValue = value,
+                    Message = "Value is not a valid number.",
+                    Severity = IsCritical ? IssueSeverity.Error : IssueSeverity.Warning
+                });
+
+                continue;
+            }
+
+            if (parsedValue < Minimum || parsedValue > Maximum)
+            {
+                issues.Add(new QualityIssue
+                {
+                    RowNumber = record.RowNumber,
+                    ColumnName = ColumnName,
+                    RuleName = Name,
+                    InvalidValue = value,
+                    Message = $"Value must be between {Minimum} and {Maximum}.",
+                    Severity = IsCritical ? IssueSeverity.Error : IssueSeverity.Warning
+                });
+            }
+        }
+
+        return issues;
     }
 }

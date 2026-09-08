@@ -1,3 +1,4 @@
+using DataQualityPlatform.Exceptions;
 using DataQualityPlatform.Models;
 
 namespace DataQualityPlatform.Quality;
@@ -11,10 +12,37 @@ public class UniqueValueRule : QualityRule
 
     public override List<QualityIssue> Evaluate(Dataset dataset)
     {
-        // TODO(STUDENT): Throw ColumnNotFoundException when ColumnName is not present.
-        // TODO(STUDENT): Treat the first occurrence of each value as valid.
-        // TODO(STUDENT): Generate an issue for each later duplicate occurrence.
-        // TODO(STUDENT): Ignore missing values because MissingValueRule handles them.
-        throw new NotImplementedException("TODO: Student implementation.");
+        if (!dataset.Columns.Any(column => column.Name == ColumnName))
+        {
+            throw new ColumnNotFoundException(ColumnName);
+        }
+
+        List<QualityIssue> issues = new();
+        HashSet<string> seenValues = new();
+
+        foreach (DataRecord record in dataset.Records)
+        {
+            string? value = GetValue(record);
+
+            if (string.IsNullOrWhiteSpace(value))
+            {
+                continue;
+            }
+
+            if (!seenValues.Add(value))
+            {
+                issues.Add(new QualityIssue
+                {
+                    RowNumber = record.RowNumber,
+                    ColumnName = ColumnName,
+                    RuleName = Name,
+                    InvalidValue = value,
+                    Message = "Duplicate value detected.",
+                    Severity = IsCritical ? IssueSeverity.Error : IssueSeverity.Warning
+                });
+            }
+        }
+
+        return issues;
     }
 }
