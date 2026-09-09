@@ -1,3 +1,5 @@
+using System.Text.RegularExpressions;
+using DataQualityPlatform.Exceptions;
 using DataQualityPlatform.Models;
 
 namespace DataQualityPlatform.Quality;
@@ -17,9 +19,37 @@ public class RegexRule : QualityRule
 
     public override List<QualityIssue> Evaluate(Dataset dataset)
     {
-        // TODO(STUDENT): Throw ColumnNotFoundException when ColumnName is not present.
-        // TODO(STUDENT): Use Pattern to validate non-missing values.
-        // TODO(STUDENT): Ignore missing values because MissingValueRule handles them.
-        throw new NotImplementedException("TODO: Student implementation.");
+        if (!dataset.Columns.Any(column => column.Name == ColumnName))
+        {
+            throw new ColumnNotFoundException(ColumnName);
+        }
+
+        List<QualityIssue> issues = new();
+        Regex regex = new(Pattern);
+
+        foreach (DataRecord record in dataset.Records)
+        {
+            string? value = GetValue(record);
+
+            if (string.IsNullOrWhiteSpace(value))
+            {
+                continue;
+            }
+
+            if (!regex.IsMatch(value))
+            {
+                issues.Add(new QualityIssue
+                {
+                    RowNumber = record.RowNumber,
+                    ColumnName = ColumnName,
+                    RuleName = Name,
+                    InvalidValue = value,
+                    Message = "Value does not match the required format.",
+                    Severity = IsCritical ? IssueSeverity.Error : IssueSeverity.Warning
+                });
+            }
+        }
+
+        return issues;
     }
 }

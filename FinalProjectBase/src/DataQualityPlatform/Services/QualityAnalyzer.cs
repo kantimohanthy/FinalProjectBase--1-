@@ -9,9 +9,14 @@ public class QualityAnalyzer
         Dataset dataset,
         IEnumerable<IQualityRule> rules)
     {
-        // TODO(STUDENT): Evaluate each rule against the dataset.
-        // TODO(STUDENT): Combine all returned QualityIssue objects into one list.
-        // TODO(STUDENT): Do not swallow exceptions from rules.
-        throw new NotImplementedException("TODO: Student implementation.");
+        List<QualityIssue> issues = new();
+
+        foreach (IQualityRule rule in rules)
+        {
+            List<QualityIssue> ruleIssues = rule.Evaluate(dataset);
+            issues.AddRange(ruleIssues);
+        }
+
+        return issues;
     }
 }
