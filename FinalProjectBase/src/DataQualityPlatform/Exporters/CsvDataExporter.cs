@@ -8,9 +8,25 @@ public class CsvDataExporter : IDataExporter
 
     public void Export(Dataset dataset, string path)
     {
-        // TODO(STUDENT): Write column headers.
-        // TODO(STUDENT): Write one output row per DataRecord.
-        // TODO(STUDENT): Keep the simple comma-separated format used by this project.
-        throw new NotImplementedException("TODO: Student implementation.");
+        string? directory = Path.GetDirectoryName(path);
+
+        if (!string.IsNullOrWhiteSpace(directory))
+        {
+            Directory.CreateDirectory(directory);
+        }
+
+        using StreamWriter writer = new(path);
+
+        writer.WriteLine(string.Join(
+            ",",
+            dataset.Columns.Select(column => column.Name)));
+
+        foreach (DataRecord record in dataset.Records)
+        {
+            IEnumerable<string?> values = dataset.Columns.Select(
+                column => record.Values.GetValueOrDefault(column.Name));
+
+            writer.WriteLine(string.Join(",", values));
+        }
     }
 }

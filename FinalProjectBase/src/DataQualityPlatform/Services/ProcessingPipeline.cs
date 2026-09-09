@@ -10,6 +10,11 @@ public class ProcessingPipeline
     private readonly List<IDataTransformation> _transformations = new();
     private readonly List<IPipelineObserver> _observers = new();
 
+    public IReadOnlyList<string> TransformationNames =>
+        _transformations
+            .Select(transformation => transformation.Name)
+            .ToList();
+
     public void AddTransformation(IDataTransformation transformation)
     {
         _transformations.Add(transformation);

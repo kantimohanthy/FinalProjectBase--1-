@@ -15,9 +15,32 @@ public class RemoveInvalidRecordTransformation : IDataTransformation
 
     public Dataset Apply(Dataset dataset)
     {
-        // TODO(STUDENT): Remove records containing at least one Error quality issue.
-        // TODO(STUDENT): Keep records that only have Warning or Information issues.
-        // TODO(STUDENT): Return a Dataset while avoiding unexpected side effects.
-        throw new NotImplementedException("TODO: Student implementation.");
+        HashSet<int> invalidRows = _issues
+            .Where(issue => issue.Severity == IssueSeverity.Error)
+            .Select(issue => issue.RowNumber)
+            .ToHashSet();
+
+        return new Dataset
+        {
+            Name = dataset.Name,
+
+            Columns = dataset.Columns
+                .Select(column => new ColumnDefinition
+                {
+                    Name = column.Name,
+                    DetectedType = column.DetectedType,
+                    IsNullable = column.IsNullable
+                })
+                .ToList(),
+
+            Records = dataset.Records
+                .Where(record => !invalidRows.Contains(record.RowNumber))
+                .Select(record => new DataRecord
+                {
+                    RowNumber = record.RowNumber,
+                    Values = new Dictionary<string, string?>(record.Values)
+                })
+                .ToList()
+        };
     }
 }
