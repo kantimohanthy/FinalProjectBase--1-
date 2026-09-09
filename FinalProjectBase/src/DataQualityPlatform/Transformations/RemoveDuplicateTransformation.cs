@@ -15,10 +15,38 @@ public class RemoveDuplicateTransformation : IDataTransformation
 
     public Dataset Apply(Dataset dataset)
     {
-        // TODO(STUDENT): Keep the first record for each value in ColumnName.
-        // TODO(STUDENT): Remove later duplicate records.
-        // TODO(STUDENT): Preserve the original record order.
-        // TODO(STUDENT): Return a Dataset while avoiding unexpected side effects.
-        throw new NotImplementedException("TODO: Student implementation.");
+        HashSet<string?> encounteredValues = new();
+
+        Dataset transformed = new()
+        {
+            Name = dataset.Name,
+
+            Columns = dataset.Columns
+                .Select(column => new ColumnDefinition
+                {
+                    Name = column.Name,
+                    DetectedType = column.DetectedType,
+                    IsNullable = column.IsNullable
+                })
+                .ToList()
+        };
+
+        foreach (DataRecord record in dataset.Records)
+        {
+            string? value = record.Values.GetValueOrDefault(ColumnName);
+
+            if (!encounteredValues.Add(value))
+            {
+                continue;
+            }
+
+            transformed.Records.Add(new DataRecord
+            {
+                RowNumber = record.RowNumber,
+                Values = new Dictionary<string, string?>(record.Values)
+            });
+        }
+
+        return transformed;
     }
 }

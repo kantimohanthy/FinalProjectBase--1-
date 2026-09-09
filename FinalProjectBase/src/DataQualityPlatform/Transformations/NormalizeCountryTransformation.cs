@@ -8,19 +8,53 @@ public class NormalizeCountryTransformation : IDataTransformation
 
     public Dataset Apply(Dataset dataset)
     {
-        // TODO(STUDENT): Trim the country value before normalization.
-        // TODO(STUDENT): Compare country values case-insensitively.
-        // TODO(STUDENT): Normalize fr, FR, and FRANCE to France.
-        // TODO(STUDENT): Normalize UK, uk, and Great Britain to United Kingdom.
-        // TODO(STUDENT): Normalize DE, de, and Deutschland to Germany.
-        // TODO(STUDENT): Normalize ES and Espana to Spain.
-        // TODO(STUDENT): Normalize IT and Italia to Italy.
-        // TODO(STUDENT): Normalize NL and Holland to Netherlands.
-        // TODO(STUDENT): Normalize BE and Belgique to Belgium.
-        // TODO(STUDENT): Normalize US, USA, and U.S.A. to United States.
-        // TODO(STUDENT): Normalize CA to Canada.
-        // TODO(STUDENT): Keep unknown countries unchanged.
-        // TODO(STUDENT): Return a Dataset while avoiding unexpected side effects.
-        throw new NotImplementedException("TODO: Student implementation.");
+        Dataset transformed = new()
+        {
+            Name = dataset.Name,
+
+            Columns = dataset.Columns
+                .Select(column => new ColumnDefinition
+                {
+                    Name = column.Name,
+                    DetectedType = column.DetectedType,
+                    IsNullable = column.IsNullable
+                })
+                .ToList(),
+
+            Records = dataset.Records
+                .Select(record => new DataRecord
+                {
+                    RowNumber = record.RowNumber,
+                    Values = new Dictionary<string, string?>(record.Values)
+                })
+                .ToList()
+        };
+
+        foreach (DataRecord record in transformed.Records)
+        {
+            if (!record.Values.TryGetValue("Country", out string? country) ||
+                country is null)
+            {
+                continue;
+            }
+
+            string trimmedCountry = country.Trim();
+
+            record.Values["Country"] = trimmedCountry.ToUpperInvariant() switch
+            {
+                "FR" or "FRANCE" => "France",
+                "UK" or "GREAT BRITAIN" => "United Kingdom",
+                "DE" or "DEUTSCHLAND" => "Germany",
+                "ES" or "ESPANA" => "Spain",
+                "IT" or "ITALIA" => "Italy",
+                "NL" or "HOLLAND" => "Netherlands",
+                "BE" or "BELGIQUE" => "Belgium",
+                "US" or "USA" or "U.S.A." => "United States",
+                "CA" => "Canada",
+                _ => trimmedCountry
+            };
+        }
+
+        return transformed;
     }
 }

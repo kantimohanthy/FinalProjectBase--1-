@@ -8,8 +8,28 @@ public class TrimStringTransformation : IDataTransformation
 
     public Dataset Apply(Dataset dataset)
     {
-        // TODO(STUDENT): Trim leading and trailing spaces from every non-null string value.
-        // TODO(STUDENT): Return a Dataset while avoiding unexpected side effects.
-        throw new NotImplementedException("TODO: Student implementation.");
+        return new Dataset
+        {
+            Name = dataset.Name,
+
+            Columns = dataset.Columns
+                .Select(column => new ColumnDefinition
+                {
+                    Name = column.Name,
+                    DetectedType = column.DetectedType,
+                    IsNullable = column.IsNullable
+                })
+                .ToList(),
+
+            Records = dataset.Records
+                .Select(record => new DataRecord
+                {
+                    RowNumber = record.RowNumber,
+                    Values = record.Values.ToDictionary(
+                        pair => pair.Key,
+                        pair => pair.Value?.Trim())
+                })
+                .ToList()
+        };
     }
 }

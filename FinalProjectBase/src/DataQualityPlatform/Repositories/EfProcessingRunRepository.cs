@@ -1,5 +1,6 @@
 using DataQualityPlatform.Persistence;
 using DataQualityPlatform.Persistence.Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace DataQualityPlatform.Repositories;
 
@@ -14,31 +15,40 @@ public class EfProcessingRunRepository : IProcessingRunRepository
 
     public void Add(ProcessingRunEntity run)
     {
-        // TODO(STUDENT): Add the run to the DbContext and save changes.
-        throw new NotImplementedException("TODO: Student implementation.");
+        _context.ProcessingRuns.Add(run);
+        _context.SaveChanges();
     }
 
     public ProcessingRunEntity? GetById(int id)
     {
-        // TODO(STUDENT): Retrieve one processing run by primary key.
-        throw new NotImplementedException("TODO: Student implementation.");
+        return _context.ProcessingRuns
+            .Include(run => run.QualityIssues)
+            .SingleOrDefault(run => run.Id == id);
     }
 
     public List<ProcessingRunEntity> GetAll()
     {
-        // TODO(STUDENT): Return all processing runs, including related quality issues when useful.
-        throw new NotImplementedException("TODO: Student implementation.");
+        return _context.ProcessingRuns
+            .Include(run => run.QualityIssues)
+            .ToList();
     }
 
     public void Update(ProcessingRunEntity run)
     {
-        // TODO(STUDENT): Update an existing processing run and save changes.
-        throw new NotImplementedException("TODO: Student implementation.");
+        _context.ProcessingRuns.Update(run);
+        _context.SaveChanges();
     }
 
     public void Delete(int id)
     {
-        // TODO(STUDENT): Delete the processing run with the specified id and save changes.
-        throw new NotImplementedException("TODO: Student implementation.");
+        ProcessingRunEntity? run = _context.ProcessingRuns.Find(id);
+
+        if (run is null)
+        {
+            return;
+        }
+
+        _context.ProcessingRuns.Remove(run);
+        _context.SaveChanges();
     }
 }

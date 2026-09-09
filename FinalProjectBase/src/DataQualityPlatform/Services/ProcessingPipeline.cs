@@ -22,11 +22,41 @@ public class ProcessingPipeline
 
     public Dataset Execute(Dataset dataset)
     {
-        // TODO(STUDENT): Execute transformations in insertion order.
-        // TODO(STUDENT): Notify observers when each step starts.
-        // TODO(STUDENT): Notify observers when each step completes successfully.
-        // TODO(STUDENT): Notify observers when each step fails.
-        // TODO(STUDENT): Wrap transformation failures in PipelineExecutionException.
-        throw new NotImplementedException("TODO: Student implementation.");
+        Dataset currentDataset = dataset;
+
+        foreach (IDataTransformation transformation in _transformations)
+        {
+            foreach (IPipelineObserver observer in _observers)
+            {
+                observer.OnStepStarted(transformation.Name);
+            }
+
+            try
+            {
+                currentDataset = transformation.Apply(currentDataset);
+
+                foreach (IPipelineObserver observer in _observers)
+                {
+                    observer.OnStepCompleted(
+                        transformation.Name,
+                        currentDataset.Records.Count);
+                }
+            }
+            catch (Exception exception)
+            {
+                foreach (IPipelineObserver observer in _observers)
+                {
+                    observer.OnStepFailed(
+                        transformation.Name,
+                        exception);
+                }
+
+                throw new PipelineExecutionException(
+                    $"Pipeline transformation failed: {transformation.Name}",
+                    exception);
+            }
+        }
+
+        return currentDataset;
     }
 }

@@ -1,3 +1,4 @@
+using DataQualityPlatform.Exceptions;
 using DataQualityPlatform.Models;
 using DataQualityPlatform.Quality;
 
@@ -7,9 +8,49 @@ public class QualityRuleFactory
 {
     public IQualityRule Create(QualityRuleConfiguration configuration)
     {
-        // TODO(STUDENT): Create the correct IQualityRule implementation for configuration.Type.
-        // TODO(STUDENT): Validate required configuration values such as Minimum, Maximum, and Pattern.
-        // TODO(STUDENT): Throw UnsupportedRuleException when the rule type is not supported.
-        throw new NotImplementedException("TODO: Student implementation.");
+        return configuration.Type switch
+        {
+            QualityRuleType.MissingValue =>
+                new MissingValueRule(
+                    configuration.ColumnName,
+                    configuration.IsCritical),
+
+            QualityRuleType.UniqueValue =>
+                new UniqueValueRule(
+                    configuration.ColumnName,
+                    configuration.IsCritical),
+
+            QualityRuleType.Range when
+                configuration.Minimum.HasValue &&
+                configuration.Maximum.HasValue =>
+                new RangeRule(
+                    configuration.ColumnName,
+                    configuration.Minimum.Value,
+                    configuration.Maximum.Value,
+                    configuration.IsCritical),
+
+            QualityRuleType.Range =>
+                throw new ArgumentException(
+                    "Range rules require Minimum and Maximum values."),
+
+            QualityRuleType.Regex when
+                !string.IsNullOrWhiteSpace(configuration.Pattern) =>
+                new RegexRule(
+                    configuration.ColumnName,
+                    configuration.Pattern,
+                    configuration.IsCritical),
+
+            QualityRuleType.Regex =>
+                throw new ArgumentException(
+                    "Regex rules require a pattern."),
+
+            QualityRuleType.DateFormat =>
+                new DateFormatRule(
+                    configuration.ColumnName,
+                    configuration.IsCritical),
+
+            _ => throw new UnsupportedRuleException(
+                $"Unsupported quality rule type: {configuration.Type}")
+        };
     }
 }
