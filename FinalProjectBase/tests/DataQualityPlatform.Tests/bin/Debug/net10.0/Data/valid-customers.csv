@@ -1,4 +1,0 @@
-CustomerId,Name,Email,Age,Country,SignupDate,TotalSpent
-1,Alice Martin,alice@example.com,34,France,2025-01-15,1250.50
-2,Bob Smith,bob@example.com,45,United Kingdom,2025-02-01,500.00
-3,Charlie Brown,charlie@example.com,29,Germany,2025-03-10,800.00
