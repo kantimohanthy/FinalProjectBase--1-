@@ -1,0 +1,67 @@
+@startuml UseCaseDiagram
+
+title Data Processing and Quality Platform - Use Case Diagram
+
+left to right direction
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+actor "Data User" as User
+
+rectangle "Data Processing and Quality Platform" {
+
+    usecase "Load CSV Dataset" as UC_Load
+    usecase "Preview Dataset" as UC_Preview
+    usecase "Generate Dataset Profile" as UC_Profile
+
+    usecase "Run Quality Checks" as UC_Checks
+    usecase "Calculate Quality Score" as UC_Score
+    usecase "View Quality Report" as UC_Report
+
+    usecase "Apply Transformations" as UC_Transform
+    usecase "Trim String Values" as UC_Trim
+    usecase "Normalize Countries" as UC_Normalize
+    usecase "Remove Duplicate Records" as UC_Duplicates
+    usecase "Remove Invalid Records" as UC_Invalid
+    usecase "Undo Last Transformation" as UC_Undo
+
+    usecase "Export Dataset to CSV" as UC_ExportCsv
+    usecase "Export Dataset to JSON" as UC_ExportJson
+
+    usecase "View Processing History" as UC_History
+    usecase "Store Processing Run" as UC_StoreRun
+
+    usecase "Manage Quality Rules" as UC_ManageRules
+    usecase "List Quality Rules" as UC_ListRules
+    usecase "Create Quality Rule" as UC_CreateRule
+    usecase "Update Quality Rule" as UC_UpdateRule
+    usecase "Delete Quality Rule" as UC_DeleteRule
+}
+
+User --> UC_Load
+User --> UC_Preview
+User --> UC_Profile
+User --> UC_Checks
+User --> UC_Report
+User --> UC_Transform
+User --> UC_Undo
+User --> UC_ExportCsv
+User --> UC_ExportJson
+User --> UC_History
+User --> UC_ManageRules
+
+UC_Checks .> UC_Score : <<include>>
+UC_Report .> UC_Score : <<include>>
+
+UC_Transform .> UC_Trim : <<include>>
+UC_Transform .> UC_Normalize : <<include>>
+UC_Transform .> UC_Duplicates : <<include>>
+UC_Transform .> UC_Invalid : <<include>>
+UC_Transform .> UC_StoreRun : <<include>>
+
+UC_ManageRules .> UC_ListRules : <<include>>
+UC_ManageRules .> UC_CreateRule : <<include>>
+UC_ManageRules .> UC_UpdateRule : <<include>>
+UC_ManageRules .> UC_DeleteRule : <<include>>
+
+@enduml
