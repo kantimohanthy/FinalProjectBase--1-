@@ -1,116 +1,323 @@
 # Data Processing and Quality Platform
 
+**Student:** Ujwal Shyam Kantimohanthy  
+**Student ID:** 0301643  
+**Technology:** C# / .NET 10 / Entity Framework Core / SQLite  
+**Application type:** Console application
+
 ## 1. Project Objective
 
-This starter solution is a console application for Data Analyst, Data Engineer, and Data Scientist students. It is designed for a final exam project that evaluates C# fundamentals, collections, OOP, abstraction, inheritance, overriding, polymorphism, UML relationships, MVC, design patterns, exceptions, Entity Framework Core, and unit testing.
+The Data Processing and Quality Platform loads customer data from CSV files, validates its structure and contents, profiles its columns, detects data-quality problems, applies transformations, calculates quality scores, exports cleaned datasets and stores processing history in SQLite.
 
-The starter solution is intentionally incomplete. A successful build does not mean that the project requirements are complete.
+The project demonstrates C# collections, LINQ, object-oriented programming, SOLID principles, MVC, custom exceptions, Entity Framework Core, unit testing and multiple design patterns.
 
-Students must complete the methods marked with `TODO(STUDENT)` and `throw new NotImplementedException("TODO: Student implementation.");`.
+## 2. Main Features
 
-## 2. Solution Structure
+- Load a customer dataset from CSV.
+- Validate file existence, required columns and row structure.
+- Display a preview of the first 10 records.
+- Generate column-level dataset statistics.
+- Run configurable data-quality rules.
+- Calculate dataset quality scores.
+- Apply transformations in insertion order.
+- Remove duplicate and invalid records.
+- Undo transformations using saved snapshots.
+- Create, read, update and delete quality-rule configurations.
+- Store processing runs and quality issues in SQLite.
+- Export cleaned datasets to CSV and JSON.
+- Display previous processing history.
+- Notify observers when pipeline steps start, complete or fail.
 
-- `src/DataQualityPlatform`: console application.
-- `tests/DataQualityPlatform.Tests`: visible xUnit tests and CSV fixtures.
-- `Data/Input`: place the final dataset here.
-- `README.md`: project instructions.
+## 3. Required Dataset Columns
 
-The project uses `.NET 10` and targets `net10.0`.
-
-## 3. Restore Packages
-
-```bash
-dotnet restore
-```
-
-## 4. Build
-
-```bash
-dotnet build
-```
-
-## 5. Run
-
-```bash
-dotnet run --project src/DataQualityPlatform
-```
-
-## 6. Run Tests
-
-```bash
-dotnet test
-```
-
-The mandatory tests compile immediately, but many tests fail at first because the starter project intentionally leaves business logic unimplemented.
-
-## 7. Dataset Location
-
-Place the provided final dataset at:
+The input CSV must contain these columns:
 
 ```text
-Data/Input/customers.csv
+CustomerId
+Name
+Email
+Age
+Country
+SignupDate
+TotalSpent
 ```
 
-The expected CSV format is simple:
+The project uses a simple CSV format:
 
-- comma separator;
-- first line contains headers;
-- no multiline fields;
-- no quoted commas.
+- Comma-separated values
+- One header row
+- One data record per line
+- No multiline fields
+- No quoted commas
 
-Do not use a third-party CSV parser.
+## 4. Solution Structure
 
-## 8. Files Students Must Not Modify
+```text
+FinalProjectBase
+├── Data
+│   ├── Input
+│   └── Output
+├── src
+│   └── DataQualityPlatform
+│       ├── Configuration
+│       ├── Controllers
+│       ├── DataSources
+│       ├── Exceptions
+│       ├── Exporters
+│       ├── Factories
+│       ├── Models
+│       ├── Observers
+│       ├── Persistence
+│       ├── Quality
+│       ├── Repositories
+│       ├── Services
+│       ├── Transformations
+│       ├── Views
+│       └── Program.cs
+├── tests
+│   └── DataQualityPlatform.Tests
+├── DataQualityPlatform.sln
+└── README.md
+```
 
-Students must not modify:
+## 5. Architecture
 
-- public method signatures;
-- interfaces used by tests;
-- mandatory tests;
-- test fixture files.
+The application follows the Model-View-Controller pattern.
 
-## 9. What Students May Add
+### Model
 
-Students may add classes and methods when needed, as long as the required public APIs continue to work and the architecture remains clear.
+The Models and Persistence entities hold application data, including:
 
-## 10. Architecture Requirements
+- `Dataset`
+- `DataRecord`
+- `ColumnDefinition`
+- `QualityIssue`
+- `QualityReport`
+- `DatasetProfile`
+- `ProcessingRunEntity`
+- `QualityRuleConfigurationEntity`
 
-MVC is mandatory:
+### View
 
-- Models hold data.
-- Views handle console input and output only.
-- Controllers coordinate workflows and delegate business operations to services.
+`ConsoleView` handles console input and output. It displays menus, dataset previews, profiles, quality reports, execution history and quality-rule configurations.
 
-`Program.cs` must only create dependencies, configure the pipeline, create the controller, and call `controller.Run()`.
+### Controller
 
-## 11. Design Pattern Requirements
+`DataProcessingController` coordinates the complete workflow. It delegates data loading, profiling, validation, transformation, persistence and exporting to specialised components.
 
-Factory is mandatory through `QualityRuleFactory`.
+## 6. Design Patterns
 
-At least one additional pattern must be implemented. The starter provides Observer extension points through `IPipelineObserver` and `ConsolePipelineObserver`, and a Singleton example through `ApplicationConfiguration`.
+### Factory Pattern
 
-## 12. Testing Guidance
+`QualityRuleFactory` creates the correct `IQualityRule` implementation from a `QualityRuleConfiguration`.
 
-The provided tests are not exhaustive. Additional teacher tests will use different datasets and will verify behavior, not hard-coded answers.
+Supported rules:
 
-Hard-coded solutions will not pass additional tests.
+- `MissingValueRule`
+- `UniqueValueRule`
+- `RangeRule`
+- `RegexRule`
+- `DateFormatRule`
 
-## 13. Grading Guidance
+This removes rule-construction logic from the controller.
 
-- Project does not compile: maximum 20/100.
-- Project compiles but fewer than 50% of mandatory tests pass: maximum 40/100.
-- At least 50% of mandatory tests pass: normal grading applies.
-- All mandatory tests pass: eligible for the full 100 points.
+### Observer Pattern
 
-## 14. Main Student Implementation Points
+`ProcessingPipeline` notifies registered `IPipelineObserver` implementations when a transformation:
 
-Students are expected to implement:
+- Starts
+- Completes successfully
+- Fails
 
-- CSV loading and validation in `CsvDataSource`.
-- quality rules in `Quality/*Rule.cs`.
-- transformations in `Transformations`.
-- profiling, quality analysis, scoring, and pipeline execution in `Services`.
-- repository CRUD operations in `EfProcessingRunRepository`.
-- factory creation logic in `QualityRuleFactory`.
-- controller workflow methods in `DataProcessingController`.
-- exporters in `Exporters`.
+`ConsolePipelineObserver` displays pipeline progress without coupling transformations to the console.
+
+### Adapter Pattern
+
+`LegacyCsvReaderAdapter` converts the incompatible `LegacyCsvReader` interface into the `IDataSource` interface expected by the application.
+
+This allows legacy CSV-reading functionality to be used without changing the controller.
+
+### Singleton Pattern
+
+`ApplicationConfiguration` provides one shared configuration instance through its `Instance` property.
+
+### Repository Pattern
+
+Repository interfaces separate persistence logic from the controller:
+
+- `IProcessingRunRepository`
+- `IQualityRuleRepository`
+
+Their Entity Framework implementations handle SQLite CRUD operations.
+
+## 7. SOLID Principles
+
+- **Single Responsibility:** Loading, validation, transformation, profiling, exporting, persistence and display are handled by separate classes.
+- **Open/Closed:** New quality rules, transformations, exporters and observers can be added without rewriting existing implementations.
+- **Liskov Substitution:** Implementations can be used through interfaces such as `IQualityRule`, `IDataTransformation`, `IDataExporter` and `IDataSource`.
+- **Interface Segregation:** Interfaces expose only the operations needed by their clients.
+- **Dependency Inversion:** The controller depends on abstractions and receives dependencies through constructor injection.
+
+## 8. Quality Rules
+
+### Missing Value Rule
+
+Detects null, empty or whitespace-only required values.
+
+### Unique Value Rule
+
+Keeps the first occurrence of a value as valid and reports every later duplicate occurrence. Missing values are ignored.
+
+### Range Rule
+
+Uses invariant-culture decimal parsing and validates values against inclusive minimum and maximum limits.
+
+### Regex Rule
+
+Validates non-missing values against a configured regular expression.
+
+### Date Format Rule
+
+Requires dates to use the exact format:
+
+```text
+yyyy-MM-dd
+```
+
+## 9. Transformations
+
+The configured processing pipeline executes:
+
+1. `TrimStringTransformation`
+2. `NormalizeCountryTransformation`
+3. `RemoveDuplicateTransformation`
+4. `RemoveInvalidRecordTransformation`
+
+Transformations return new dataset objects to avoid unexpected modification of the original dataset.
+
+`TransformationHistory` stores snapshots using a stack, allowing transformations to be undone in last-in, first-out order.
+
+## 10. Database
+
+The application uses SQLite through Entity Framework Core.
+
+Database filename:
+
+```text
+data-quality-platform.db
+```
+
+The database is created automatically at application startup using:
+
+```csharp
+context.Database.EnsureCreated();
+```
+
+Stored information includes:
+
+- Processing runs
+- Processing status
+- Input and output record counts
+- Quality scores
+- Quality issues
+- Quality-rule configurations
+
+Quality-rule configurations support Create, Read, Update and Delete operations through the console menu.
+
+## 11. Build Instructions
+
+From the solution directory, run:
+
+```powershell
+dotnet restore
+dotnet build "DataQualityPlatform.sln"
+```
+
+## 12. Run Instructions
+
+```powershell
+dotnet run --project ".\src\DataQualityPlatform\DataQualityPlatform.csproj"
+```
+
+The application displays the following options:
+
+```text
+1. Load dataset
+2. Show preview
+3. Show profile
+4. Run quality checks
+5. Apply transformations
+6. Show quality report
+7. Export dataset
+8. Show execution history
+9. Undo last transformation
+10. Manage quality rules
+0. Exit
+```
+
+## 13. Test Instructions
+
+Run all automated tests with:
+
+```powershell
+dotnet test "DataQualityPlatform.sln"
+```
+
+Verified result:
+
+```text
+Total tests: 34
+Passed: 34
+Failed: 0
+Skipped: 0
+```
+
+The tests cover:
+
+- CSV loading and validation
+- Quality rules
+- Quality score calculation
+- Rule factory
+- Dataset transformations
+- Processing pipeline
+- Observer notifications
+- Entity Framework repository operations
+
+## 14. Exported Files
+
+Example cleaned outputs are stored in:
+
+```text
+Data/Output/cleaned-customers.csv
+Data/Output/cleaned-customers.json
+```
+
+The CSV exporter writes headers followed by one line per record.
+
+The JSON exporter serializes the complete dataset, including columns and records, using indented JSON.
+
+## 15. Exception Handling
+
+The application uses validation and custom exceptions for failures including:
+
+- Missing dataset files
+- Invalid CSV structure
+- Missing columns
+- Unsupported quality-rule types
+- Pipeline transformation failures
+
+The controller catches workflow errors and displays clear messages without terminating the application unexpectedly.
+
+## 16. Final Verification
+
+Before submission, the following were verified:
+
+- The solution builds successfully.
+- All 34 automated tests pass.
+- CSV loading works through the adapter.
+- Dataset preview and profiling work.
+- Quality checks and transformations work.
+- CSV and JSON exports are generated.
+- Processing history is stored in SQLite.
+- Transformation undo works.
+- Quality-rule CRUD operations work.
