@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("DataQualityPlatform")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+6cdb31c487e076683baffaea0cdc2f0afcaef0a3")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+72006b87ec67e529c9d864c6855ac00d706542a5")]
 [assembly: System.Reflection.AssemblyProductAttribute("DataQualityPlatform")]
 [assembly: System.Reflection.AssemblyTitleAttribute("DataQualityPlatform")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

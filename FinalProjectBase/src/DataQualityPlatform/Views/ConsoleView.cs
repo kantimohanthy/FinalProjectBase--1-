@@ -18,19 +18,26 @@ public class ConsoleView
         Console.WriteLine("7. Export dataset");
         Console.WriteLine("8. Show execution history");
         Console.WriteLine("9. Undo last transformation");
+        Console.WriteLine("10. Manage quality rules");
         Console.WriteLine("0. Exit");
     }
 
     public string ReadMenuChoice()
     {
         Console.Write("Select an option: ");
-        return Console.ReadLine() ?? string.Empty;
+        return (Console.ReadLine() ?? string.Empty).Trim();
     }
 
     public string ReadFilePath()
     {
         Console.Write("Enter a file path: ");
-        return Console.ReadLine() ?? string.Empty;
+        return (Console.ReadLine() ?? string.Empty).Trim();
+    }
+
+    public string ReadInput(string prompt)
+    {
+        Console.Write(prompt);
+        return (Console.ReadLine() ?? string.Empty).Trim();
     }
 
     public void DisplayMessage(string message)
@@ -54,11 +61,18 @@ public class ConsoleView
             return;
         }
 
-        Console.WriteLine(string.Join(", ", dataset.Columns.Select(column => column.Name)));
+        Console.WriteLine(
+            string.Join(
+                ", ",
+                dataset.Columns.Select(column => column.Name)));
 
-        foreach (DataRecord record in dataset.Records.Take(5))
+        foreach (DataRecord record in dataset.Records.Take(10))
         {
-            IEnumerable<string?> values = dataset.Columns.Select(column => record.Values.GetValueOrDefault(column.Name));
+            IEnumerable<string?> values =
+                dataset.Columns.Select(
+                    column =>
+                        record.Values.GetValueOrDefault(column.Name));
+
             Console.WriteLine(string.Join(", ", values));
         }
     }
@@ -69,12 +83,18 @@ public class ConsoleView
         Console.WriteLine($"Rows: {profile.RowCount}");
         Console.WriteLine($"Columns: {profile.ColumnCount}");
 
-        foreach (KeyValuePair<string, Dictionary<string, string?>> column in profile.ColumnStatistics)
+        foreach (
+            KeyValuePair<string, Dictionary<string, string?>>
+                column in profile.ColumnStatistics)
         {
             Console.WriteLine($"Column: {column.Key}");
-            foreach (KeyValuePair<string, string?> statistic in column.Value)
+
+            foreach (
+                KeyValuePair<string, string?>
+                    statistic in column.Value)
             {
-                Console.WriteLine($"  {statistic.Key}: {statistic.Value}");
+                Console.WriteLine(
+                    $"  {statistic.Key}: {statistic.Value}");
             }
         }
     }
@@ -83,20 +103,63 @@ public class ConsoleView
     {
         Console.WriteLine($"Dataset: {report.DatasetName}");
         Console.WriteLine($"Execution date: {report.ExecutionDate}");
-        Console.WriteLine($"Initial records: {report.InitialRecordCount}");
-        Console.WriteLine($"Final records: {report.FinalRecordCount}");
+        Console.WriteLine(
+            $"Initial records: {report.InitialRecordCount}");
+        Console.WriteLine(
+            $"Final records: {report.FinalRecordCount}");
         Console.WriteLine($"Initial score: {report.InitialScore}");
         Console.WriteLine($"Final score: {report.FinalScore}");
-        Console.WriteLine($"Issues: {report.DetectedIssues.Count}");
-        Console.WriteLine($"Transformations: {string.Join(", ", report.AppliedTransformations)}");
+        Console.WriteLine(
+            $"Issues: {report.DetectedIssues.Count}");
+        Console.WriteLine(
+            $"Transformations: {string.Join(", ", report.AppliedTransformations)}");
     }
 
-    public void DisplayExecutionHistory(IEnumerable<ProcessingRunEntity> runs)
+    public void DisplayExecutionHistory(
+        IEnumerable<ProcessingRunEntity> runs)
     {
-        foreach (ProcessingRunEntity run in runs)
+        List<ProcessingRunEntity> runList = runs.ToList();
+
+        if (runList.Count == 0)
+        {
+            Console.WriteLine("No processing history available.");
+            return;
+        }
+
+        foreach (ProcessingRunEntity run in runList)
         {
             Console.WriteLine(
-                $"{run.Id}: {run.DatasetName} | {run.Status} | Score: {run.QualityScore} | Started: {run.StartedAt}");
+                $"{run.Id}: {run.DatasetName} | " +
+                $"{run.Status} | Score: {run.QualityScore} | " +
+                $"Started: {run.StartedAt}");
+        }
+    }
+
+    public void DisplayQualityRuleConfigurations(
+        IEnumerable<QualityRuleConfigurationEntity> configurations)
+    {
+        List<QualityRuleConfigurationEntity> configurationList =
+            configurations.ToList();
+
+        if (configurationList.Count == 0)
+        {
+            Console.WriteLine(
+                "No quality-rule configurations available.");
+            return;
+        }
+
+        foreach (
+            QualityRuleConfigurationEntity configuration
+                in configurationList)
+        {
+            Console.WriteLine(
+                $"{configuration.Id}: {configuration.Name} | " +
+                $"Type: {configuration.RuleType} | " +
+                $"Column: {configuration.ColumnName} | " +
+                $"Critical: {configuration.IsCritical} | " +
+                $"Minimum: {configuration.Minimum} | " +
+                $"Maximum: {configuration.Maximum} | " +
+                $"Pattern: {configuration.Pattern}");
         }
     }
 }

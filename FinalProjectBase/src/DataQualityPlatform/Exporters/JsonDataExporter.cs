@@ -1,3 +1,4 @@
+using System.Text.Json;
 using DataQualityPlatform.Models;
 
 namespace DataQualityPlatform.Exporters;
@@ -8,8 +9,19 @@ public class JsonDataExporter : IDataExporter
 
     public void Export(Dataset dataset, string path)
     {
-        // TODO(STUDENT): Serialize the Dataset to JSON.
-        // TODO(STUDENT): Include columns and records in the exported file.
-        throw new NotImplementedException("TODO: Student implementation.");
+        string? directory = Path.GetDirectoryName(path);
+
+        if (!string.IsNullOrWhiteSpace(directory))
+        {
+            Directory.CreateDirectory(directory);
+        }
+
+        JsonSerializerOptions options = new()
+        {
+            WriteIndented = true
+        };
+
+        string json = JsonSerializer.Serialize(dataset, options);
+        File.WriteAllText(path, json);
     }
 }

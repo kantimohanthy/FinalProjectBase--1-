@@ -7,20 +7,33 @@ namespace DataQualityPlatform.Services;
 
 public class ProcessingPipeline
 {
-    private readonly List<IDataTransformation> _transformations = new();
-    private readonly List<IPipelineObserver> _observers = new();
+    private readonly List<IDataTransformation> _transformations =
+        new();
+
+    private readonly List<IPipelineObserver> _observers =
+        new();
+
+    private readonly TransformationHistory? _transformationHistory;
+
+    public ProcessingPipeline(
+        TransformationHistory? transformationHistory = null)
+    {
+        _transformationHistory = transformationHistory;
+    }
 
     public IReadOnlyList<string> TransformationNames =>
         _transformations
             .Select(transformation => transformation.Name)
             .ToList();
 
-    public void AddTransformation(IDataTransformation transformation)
+    public void AddTransformation(
+        IDataTransformation transformation)
     {
         _transformations.Add(transformation);
     }
 
-    public void AddObserver(IPipelineObserver observer)
+    public void AddObserver(
+        IPipelineObserver observer)
     {
         _observers.Add(observer);
     }
@@ -29,18 +42,29 @@ public class ProcessingPipeline
     {
         Dataset currentDataset = dataset;
 
-        foreach (IDataTransformation transformation in _transformations)
+        foreach (
+            IDataTransformation transformation
+                in _transformations)
         {
-            foreach (IPipelineObserver observer in _observers)
+            foreach (
+                IPipelineObserver observer
+                    in _observers)
             {
-                observer.OnStepStarted(transformation.Name);
+                observer.OnStepStarted(
+                    transformation.Name);
             }
 
             try
             {
-                currentDataset = transformation.Apply(currentDataset);
+                _transformationHistory?.Save(
+                    currentDataset);
 
-                foreach (IPipelineObserver observer in _observers)
+                currentDataset =
+                    transformation.Apply(currentDataset);
+
+                foreach (
+                    IPipelineObserver observer
+                        in _observers)
                 {
                     observer.OnStepCompleted(
                         transformation.Name,
@@ -49,7 +73,9 @@ public class ProcessingPipeline
             }
             catch (Exception exception)
             {
-                foreach (IPipelineObserver observer in _observers)
+                foreach (
+                    IPipelineObserver observer
+                        in _observers)
                 {
                     observer.OnStepFailed(
                         transformation.Name,
@@ -57,7 +83,8 @@ public class ProcessingPipeline
                 }
 
                 throw new PipelineExecutionException(
-                    $"Pipeline transformation failed: {transformation.Name}",
+                    $"Pipeline transformation failed: " +
+                    $"{transformation.Name}",
                     exception);
             }
         }

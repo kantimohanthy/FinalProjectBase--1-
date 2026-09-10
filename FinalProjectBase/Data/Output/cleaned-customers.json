@@ -1,0 +1,78 @@
+{
+  "Name": "valid-customers.csv",
+  "Columns": [
+    {
+      "Name": "CustomerId",
+      "DetectedType": 0,
+      "IsNullable": false
+    },
+    {
+      "Name": "Name",
+      "DetectedType": 0,
+      "IsNullable": false
+    },
+    {
+      "Name": "Email",
+      "DetectedType": 0,
+      "IsNullable": false
+    },
+    {
+      "Name": "Age",
+      "DetectedType": 0,
+      "IsNullable": false
+    },
+    {
+      "Name": "Country",
+      "DetectedType": 0,
+      "IsNullable": false
+    },
+    {
+      "Name": "SignupDate",
+      "DetectedType": 0,
+      "IsNullable": false
+    },
+    {
+      "Name": "TotalSpent",
+      "DetectedType": 0,
+      "IsNullable": false
+    }
+  ],
+  "Records": [
+    {
+      "RowNumber": 1,
+      "Values": {
+        "CustomerId": "1",
+        "Name": "Alice Martin",
+        "Email": "alice@example.com",
+        "Age": "34",
+        "Country": "France",
+        "SignupDate": "2025-01-15",
+        "TotalSpent": "1250.50"
+      }
+    },
+    {
+      "RowNumber": 2,
+      "Values": {
+        "CustomerId": "2",
+        "Name": "Bob Smith",
+        "Email": "bob@example.com",
+        "Age": "45",
+        "Country": "United Kingdom",
+        "SignupDate": "2025-02-01",
+        "TotalSpent": "500.00"
+      }
+    },
+    {
+      "RowNumber": 3,
+      "Values": {
+        "CustomerId": "3",
+        "Name": "Charlie Brown",
+        "Email": "charlie@example.com",
+        "Age": "29",
+        "Country": "Germany",
+        "SignupDate": "2025-03-10",
+        "TotalSpent": "800.00"
+      }
+    }
+  ]
+}

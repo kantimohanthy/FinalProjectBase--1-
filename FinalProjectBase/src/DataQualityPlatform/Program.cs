@@ -11,28 +11,68 @@ using DataQualityPlatform.Transformations;
 using DataQualityPlatform.Views;
 using Microsoft.EntityFrameworkCore;
 
-ApplicationConfiguration configuration = ApplicationConfiguration.Instance;
+ApplicationConfiguration configuration =
+    ApplicationConfiguration.Instance;
 
-DbContextOptions<DataQualityContext> options = new DbContextOptionsBuilder<DataQualityContext>()
-    .UseSqlite("Data Source=data-quality-platform.db")
-    .Options;
+DbContextOptions<DataQualityContext> options =
+    new DbContextOptionsBuilder<DataQualityContext>()
+        .UseSqlite("Data Source=data-quality-platform.db")
+        .Options;
 
 DataQualityContext context = new(options);
-IProcessingRunRepository repository = new EfProcessingRunRepository(context);
+context.Database.EnsureCreated();
 
-ProcessingPipeline pipeline = new();
-pipeline.AddObserver(new ConsolePipelineObserver());
-pipeline.AddTransformation(new TrimStringTransformation());
-pipeline.AddTransformation(new NormalizeCountryTransformation());
+IProcessingRunRepository processingRunRepository =
+    new EfProcessingRunRepository(context);
+
+IQualityRuleRepository qualityRuleRepository =
+    new EfQualityRuleRepository(context);
+
+TransformationHistory transformationHistory = new();
+
+ProcessingPipeline pipeline =
+    new(transformationHistory);
+
+pipeline.AddObserver(
+    new ConsolePipelineObserver());
+
+pipeline.AddTransformation(
+    new TrimStringTransformation());
+
+pipeline.AddTransformation(
+    new NormalizeCountryTransformation());
+
+pipeline.AddTransformation(
+    new RemoveDuplicateTransformation("CustomerId"));
 
 List<IQualityRule> rules =
 [
-    new MissingValueRule("CustomerId", true),
-    new MissingValueRule("Email", true),
-    new UniqueValueRule("CustomerId", true),
-    new RangeRule("Age", 0, 120, true),
-    new RegexRule("Email", @"^[^@\s]+@[^@\s]+\.[^@\s]+$", true),
-    new DateFormatRule("SignupDate", true)
+    new MissingValueRule(
+        "CustomerId",
+        true),
+
+    new MissingValueRule(
+        "Email",
+        true),
+
+    new UniqueValueRule(
+        "CustomerId",
+        true),
+
+    new RangeRule(
+        "Age",
+        0,
+        120,
+        true),
+
+    new RegexRule(
+        "Email",
+        @"^[^@\s]+@[^@\s]+\.[^@\s]+$",
+        true),
+
+    new DateFormatRule(
+        "SignupDate",
+        true)
 ];
 
 List<IDataExporter> exporters =
@@ -42,19 +82,17 @@ List<IDataExporter> exporters =
 ];
 
 DataProcessingController controller = new(
-    new CsvDataSource(),
+    new LegacyCsvReaderAdapter(
+        new LegacyCsvReader()),
     new ConsoleView(),
     new DatasetProfiler(),
     new QualityAnalyzer(),
     pipeline,
     new QualityScoreCalculator(),
-    repository,
+    processingRunRepository,
+    qualityRuleRepository,
     rules,
     exporters,
-    new TransformationHistory());
+    transformationHistory);
 
 controller.Run();
-
-
-
-
